@@ -9,6 +9,7 @@ import com.example.productservice.entity.Product;
 import com.example.productservice.mapper.ProductMapper;
 import com.example.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public ProductDto getOne(Long id) {
+    public ProductDto getOne(String id) {
         Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException("Product Not Found"));
         return productMapper.toDto(product);
     }
@@ -61,7 +62,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public UpdateProductResponse update(Long id,UpdateProductRequest request) {
+    public UpdateProductResponse update(String id,UpdateProductRequest request) {
         Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException("Product Not Found"));
 
         Product updatedProduct = Product.builder()
@@ -85,7 +86,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         productRepository.deleteById(id);
     }
 }

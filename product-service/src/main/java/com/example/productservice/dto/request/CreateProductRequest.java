@@ -2,6 +2,8 @@ package com.example.productservice.dto.request;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,12 +13,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateProductRequest {
 
-    @NotBlank(message = "Name is mandatory")
+
+    @NotNull(message = "Name is not null")
+    @Size(min = 3,message = "Name should be grater than 3.")
     String name;
-    @NotBlank(message = "Price is mandatory")
+
+    @NotNull(message = "Price is mandatory")
     Long price;
-    @NotBlank(message = "Stock is mandatory")
+
+    @NotNull(message = "Stock is mandatory")
     Long stock;
+
     @Nullable
     String imgUrl;
 }

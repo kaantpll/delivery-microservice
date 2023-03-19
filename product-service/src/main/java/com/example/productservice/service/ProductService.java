@@ -12,9 +12,9 @@ import java.util.List;
 public interface ProductService {
 
     List<ProductDto> getAll();
-    ProductDto getOne(Long id);
+    ProductDto getOne(String id);
     CreateProductResponse add(CreateProductRequest request);
-    UpdateProductResponse update(Long id,UpdateProductRequest request);
-    void delete(Long id);
+    UpdateProductResponse update(String id,UpdateProductRequest request);
+    void delete(String id);
 
 }

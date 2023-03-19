@@ -6,6 +6,7 @@ import com.example.productservice.dto.request.UpdateProductRequest;
 import com.example.productservice.dto.response.CreateProductResponse;
 import com.example.productservice.dto.response.UpdateProductResponse;
 import com.example.productservice.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
-@Validated
 public class ProductController {
 
     private final ProductService productService;
@@ -32,25 +32,25 @@ public class ProductController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ProductDto> getOne(@PathVariable Long id){
+    public ResponseEntity<ProductDto> getOne(@PathVariable String id){
         return ResponseEntity.ok(productService.getOne(id));
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<CreateProductResponse> create(@RequestBody CreateProductRequest createProductRequest){
+    public ResponseEntity<CreateProductResponse> create(@Valid @RequestBody CreateProductRequest createProductRequest){
         return ResponseEntity.ok(productService.add(createProductRequest));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UpdateProductResponse> update(@RequestBody UpdateProductRequest updateProductRequest, @PathVariable Long id){
+    public ResponseEntity<UpdateProductResponse> update(@RequestBody UpdateProductRequest updateProductRequest, @PathVariable String id){
         return ResponseEntity.ok(productService.update(id,updateProductRequest));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable String id){
         productService.delete(id);
     }
 
