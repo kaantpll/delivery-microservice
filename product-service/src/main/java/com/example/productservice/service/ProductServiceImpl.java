@@ -10,11 +10,13 @@ import com.example.productservice.mapper.ProductMapper;
 import com.example.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService{
+
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
@@ -24,8 +26,10 @@ public class ProductServiceImpl implements ProductService{
         this.productMapper = productMapper;
     }
 
+
     @Override
     public List<ProductDto> getAll() {
+
         return productRepository.findAll().stream().map(productMapper::toDto).collect(Collectors.toList());
     }
 

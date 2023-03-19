@@ -6,8 +6,9 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import org.springframework.context.annotation.Bean;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ProductMapper {
 
     ProductMapper instance = Mappers.getMapper(ProductMapper.class);
@@ -16,8 +17,8 @@ public interface ProductMapper {
     @Mapping(source = "price",target="price")
     @Mapping(source = "stock",target="stock")
     @Mapping(source = "imgUrl",target="imgUrl")
-    ProductDto toDto(Product from);
+     ProductDto toDto(Product from);
 
     @InheritInverseConfiguration(name = "toDto")
-    Product fromDto(ProductDto from);
+     Product fromDto(ProductDto from);
 }

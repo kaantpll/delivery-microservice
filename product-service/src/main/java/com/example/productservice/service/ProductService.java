@@ -5,6 +5,7 @@ import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.request.UpdateProductRequest;
 import com.example.productservice.dto.response.CreateProductResponse;
 import com.example.productservice.dto.response.UpdateProductResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
