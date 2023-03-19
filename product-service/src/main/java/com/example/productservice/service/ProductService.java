@@ -13,7 +13,7 @@ public interface ProductService {
     List<ProductDto> getAll();
     ProductDto getOne(Long id);
     CreateProductResponse add(CreateProductRequest request);
-    UpdateProductResponse update(UpdateProductRequest request);
+    UpdateProductResponse update(Long id,UpdateProductRequest request);
     void delete(Long id);
 
 }

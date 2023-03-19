@@ -31,21 +31,57 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ProductDto getOne(Long id) {
-        return null;
+        Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException("Product Not Found"));
+        return productMapper.toDto(product);
     }
 
     @Override
     public CreateProductResponse add(CreateProductRequest request) {
-        return null;
+        Product product = Product.builder()
+                .name(request.getName())
+                .price(request.getPrice())
+                .imgUrl(request.getImgUrl())
+                .stock(request.getStock())
+                .build();
+
+        productRepository.save(product);
+
+        CreateProductResponse response = CreateProductResponse.builder()
+                .name(product.getName())
+                .stock(product.getStock())
+                .imgUrl(product.getImgUrl())
+                .price(product.getPrice())
+                .build();
+
+        return response;
     }
 
     @Override
-    public UpdateProductResponse update(UpdateProductRequest request) {
-        return null;
+    public UpdateProductResponse update(Long id,UpdateProductRequest request) {
+        Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException("Product Not Found"));
+
+        Product updatedProduct = Product.builder()
+                .name(product.getName())
+                .stock(product.getStock())
+                .imgUrl(product.getImgUrl())
+                .price(product.getPrice())
+                .build();
+
+        productRepository.save(updatedProduct);
+
+        UpdateProductResponse response = UpdateProductResponse.builder()
+                .name(product.getName())
+                .stock(product.getStock())
+                .imgUrl(product.getImgUrl())
+                .price(product.getPrice())
+                .build();
+
+
+        return response;
     }
 
     @Override
     public void delete(Long id) {
-
+        productRepository.deleteById(id);
     }
 }
