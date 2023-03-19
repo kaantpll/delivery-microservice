@@ -3,7 +3,7 @@
 ## Tecnology I use 
 
 - Backend:
-  - Java & Kotlin Spring Boot (kotlin is used in test and entity classes.)
+  - Spring Boot (Java)
 - Frontend:
   - Nextjs (Typescript)
   - Material UI 
@@ -15,5 +15,3 @@
 - Monitoring
     - Grafana
   
-#Standarts
- - Camelcase
