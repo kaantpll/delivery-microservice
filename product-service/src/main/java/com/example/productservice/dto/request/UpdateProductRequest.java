@@ -1,5 +1,7 @@
 package com.example.productservice.dto.request;
 
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProductRequest {
+    @NotBlank(message = "Name is mandatory")
     String name;
+    @NotBlank(message = "Price is mandatory")
     Long price;
+    @NotBlank(message = "Stock is mandatory")
     Long stock;
+    @Nullable
     String imgUrl;
 }
