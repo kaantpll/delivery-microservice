@@ -8,9 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-server" />
-        <module name="order-service" />
       </profile>
-      <profile name="Annotation profile for product-service" enabled="true">
+      <profile name="Annotation profile for order-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -20,6 +19,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.3.Final/mapstruct-1.5.3.Final.jar" />
         </processorPath>
         <module name="product-service" />
+        <module name="order-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
