@@ -1,5 +1,6 @@
 package com.example.productservice.service;
 
+import com.example.productservice.constants.ErrorMessages;
 import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.request.CreateProductRequest;
 import com.example.productservice.dto.request.UpdateProductRequest;
@@ -36,7 +37,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ProductDto getOne(String id) {
-        Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException("Product Not Found"));
+        Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException(ErrorMessages.PRODUCT_NOT_FOUND));
         return productMapper.toDto(product);
     }
 
@@ -63,7 +64,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public UpdateProductResponse update(String id,UpdateProductRequest request) {
-        Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException("Product Not Found"));
+        Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException(ErrorMessages.PRODUCT_NOT_FOUND));
 
         Product updatedProduct = Product.builder()
                 .name(product.getName())
