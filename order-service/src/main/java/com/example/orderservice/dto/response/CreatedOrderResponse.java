@@ -14,7 +14,5 @@ public class CreatedOrderResponse {
     private String id;
     private String productId;
     private long quantity;
-    private Instant orderData;
     private long amount;
-    private OrderStatus orderStatus;
 }

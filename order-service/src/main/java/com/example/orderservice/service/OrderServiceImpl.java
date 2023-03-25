@@ -1,0 +1,68 @@
+package com.example.orderservice.service;
+
+import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.dto.response.CreatedOrderResponse;
+import com.example.orderservice.dto.response.UpdatedOrderResponse;
+import com.example.orderservice.entity.Order;
+import com.example.orderservice.entity.OrderStatus;
+import com.example.orderservice.repository.OrderRepository;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.List;
+
+@Service
+@Log4j2
+public class OrderServiceImpl implements OrderService{
+
+    private final OrderService orderService;
+    private final OrderRepository orderRepository;
+
+    public OrderServiceImpl(OrderService orderService, OrderRepository orderRepository) {
+        this.orderService = orderService;
+        this.orderRepository = orderRepository;
+    }
+
+    @Override
+    public List<OrderDto> getAll() {
+        return null;
+    }
+
+    @Override
+    public OrderDto getOne(String id) {
+        return null;
+    }
+
+    @Override
+    public CreatedOrderResponse placeOrder(CreatedOrderResponse request) {
+        log.info("Placing order request");
+
+        Order order = Order.builder()
+                .amount(request.getAmount())
+                .orderStatus(OrderStatus.CREATED)
+                .productId(request.getProductId())
+                .orderDate(Instant.now())
+                .quantity(request.getQuantity())
+                .build();
+
+        order = orderRepository.save(order);
+
+        log.info("Order placed. Order id : "+order.getId());
+
+        CreatedOrderResponse response = new CreatedOrderResponse();
+        response.setProductId(order.getProductId());
+
+        return response;
+    }
+
+    @Override
+    public UpdatedOrderResponse update(String id, UpdatedOrderResponse request) {
+        return null;
+    }
+
+    @Override
+    public void delete(String id) {
+
+    }
+}

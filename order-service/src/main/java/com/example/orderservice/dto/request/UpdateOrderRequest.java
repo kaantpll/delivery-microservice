@@ -13,7 +13,7 @@ import java.time.Instant;
 public class UpdateOrderRequest {
     private String productId;
     private long quantity;
-    private Instant orderData;
+    private Instant orderDate;
     private long amount;
-    private OrderStatus orderStatus;
+  //  private OrderStatus orderStatus;
 }
