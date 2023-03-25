@@ -15,5 +15,5 @@ public class UpdateOrderRequest {
     private long quantity;
     private Instant orderDate;
     private long amount;
-  //  private OrderStatus orderStatus;
+    private OrderStatus orderStatus;
 }

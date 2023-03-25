@@ -1,6 +1,7 @@
 package com.example.orderservice.service;
 
 import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.dto.request.CreateOrderRequest;
 import com.example.orderservice.dto.response.CreatedOrderResponse;
 import com.example.orderservice.dto.response.UpdatedOrderResponse;
 import com.example.orderservice.entity.Order;
@@ -12,15 +13,13 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
 
-@Service
+
 @Log4j2
+@Service
 public class OrderServiceImpl implements OrderService{
 
-    private final OrderService orderService;
     private final OrderRepository orderRepository;
-
-    public OrderServiceImpl(OrderService orderService, OrderRepository orderRepository) {
-        this.orderService = orderService;
+    public OrderServiceImpl( OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
@@ -35,7 +34,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public CreatedOrderResponse placeOrder(CreatedOrderResponse request) {
+    public CreatedOrderResponse placeOrder(CreateOrderRequest request) {
         log.info("Placing order request");
 
         Order order = Order.builder()

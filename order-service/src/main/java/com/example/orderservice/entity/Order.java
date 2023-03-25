@@ -18,7 +18,7 @@ import java.time.Instant;
 public class Order {
 
     @Id
-    @Column(name = "product_id")
+    @Column(name = "order_id")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
