@@ -3,8 +3,8 @@ package com.example.productservice.controller;
 import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.request.CreateProductRequest;
 import com.example.productservice.dto.request.UpdateProductRequest;
-import com.example.productservice.dto.response.CreateProductResponse;
-import com.example.productservice.dto.response.UpdateProductResponse;
+import com.example.productservice.dto.response.CreatedProductResponse;
+import com.example.productservice.dto.response.UpdatedProductResponse;
 import com.example.productservice.entity.Product;
 import com.example.productservice.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,11 +13,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.models.media.MediaType;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -66,13 +64,13 @@ public class ProductController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<CreateProductResponse> create(@Valid @RequestBody CreateProductRequest createProductRequest){
+    public ResponseEntity<CreatedProductResponse> create(@Valid @RequestBody CreateProductRequest createProductRequest){
         return ResponseEntity.ok(productService.add(createProductRequest));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UpdateProductResponse> update(@RequestBody UpdateProductRequest updateProductRequest, @PathVariable String id){
+    public ResponseEntity<UpdatedProductResponse> update(@RequestBody UpdateProductRequest updateProductRequest, @PathVariable String id){
         return ResponseEntity.ok(productService.update(id,updateProductRequest));
     }
 

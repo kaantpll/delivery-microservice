@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UpdateProductResponse {
-    String name;
-    Long price;
-    Long stock;
-    String imgUrl;
+public class UpdatedProductResponse {
+    private String id;
+    private String name;
+    private Long price;
+    private Long stock;
+    private String imgUrl;
 }

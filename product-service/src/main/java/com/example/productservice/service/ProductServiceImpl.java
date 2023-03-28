@@ -4,13 +4,12 @@ import com.example.productservice.constants.ErrorMessages;
 import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.request.CreateProductRequest;
 import com.example.productservice.dto.request.UpdateProductRequest;
-import com.example.productservice.dto.response.CreateProductResponse;
-import com.example.productservice.dto.response.UpdateProductResponse;
+import com.example.productservice.dto.response.CreatedProductResponse;
+import com.example.productservice.dto.response.UpdatedProductResponse;
 import com.example.productservice.entity.Product;
 import com.example.productservice.mapper.ProductMapper;
 import com.example.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.List;
@@ -42,7 +41,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public CreateProductResponse add(CreateProductRequest request) {
+    public CreatedProductResponse add(CreateProductRequest request) {
         Product product = Product.builder()
                 .name(request.getName())
                 .price(request.getPrice())
@@ -52,7 +51,7 @@ public class ProductServiceImpl implements ProductService{
 
         productRepository.save(product);
 
-        CreateProductResponse response = CreateProductResponse.builder()
+        CreatedProductResponse response = CreatedProductResponse.builder()
                 .name(product.getName())
                 .stock(product.getStock())
                 .imgUrl(product.getImgUrl())
@@ -63,7 +62,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public UpdateProductResponse update(String id,UpdateProductRequest request) {
+    public UpdatedProductResponse update(String id, UpdateProductRequest request) {
         Product product = productRepository.findById(id).orElseThrow(()->new RuntimeException(ErrorMessages.PRODUCT_NOT_FOUND));
 
         Product updatedProduct = Product.builder()
@@ -75,7 +74,7 @@ public class ProductServiceImpl implements ProductService{
 
         productRepository.save(updatedProduct);
 
-        UpdateProductResponse response = UpdateProductResponse.builder()
+        UpdatedProductResponse response = UpdatedProductResponse.builder()
                 .name(product.getName())
                 .stock(product.getStock())
                 .imgUrl(product.getImgUrl())
