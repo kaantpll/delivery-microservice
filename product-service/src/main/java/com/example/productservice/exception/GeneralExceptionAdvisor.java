@@ -36,6 +36,8 @@ public class GeneralExceptionAdvisor extends ResponseEntityExceptionHandler{
 
 
 
+    @ExceptionHandler(InsufficientProduct.class)
+    public ResponseEntity<?> handle(InsufficientProduct exception){return handleNotFound(exception.getMessage());}
     @ExceptionHandler(ProductNotFound.class)
     public ResponseEntity<?> handle(ProductNotFound exception) {
         return handleNotFound(exception.getMessage());

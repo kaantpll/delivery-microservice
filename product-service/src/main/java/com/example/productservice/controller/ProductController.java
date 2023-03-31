@@ -4,6 +4,7 @@ import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.request.CreateProductRequest;
 import com.example.productservice.dto.request.UpdateProductRequest;
 import com.example.productservice.dto.response.CreatedProductResponse;
+import com.example.productservice.dto.response.ProductResponse;
 import com.example.productservice.dto.response.UpdatedProductResponse;
 import com.example.productservice.entity.Product;
 import com.example.productservice.service.ProductService;
@@ -66,6 +67,13 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<CreatedProductResponse> create(@Valid @RequestBody CreateProductRequest createProductRequest){
         return ResponseEntity.ok(productService.add(createProductRequest));
+    }
+
+    @PutMapping("/reduce-quantity/{id}")
+    public ResponseEntity<Void> reduceQuantity(@PathVariable("id") String productId,@RequestParam long quantity){
+        productService.reduceQuantity(productId,quantity);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

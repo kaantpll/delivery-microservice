@@ -5,8 +5,11 @@ import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.request.CreateProductRequest;
 import com.example.productservice.dto.request.UpdateProductRequest;
 import com.example.productservice.dto.response.CreatedProductResponse;
+import com.example.productservice.dto.response.ProductResponse;
 import com.example.productservice.dto.response.UpdatedProductResponse;
 import com.example.productservice.entity.Product;
+import com.example.productservice.exception.InsufficientProduct;
+import com.example.productservice.exception.ProductNotFound;
 import com.example.productservice.mapper.ProductMapper;
 import com.example.productservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -83,6 +86,19 @@ public class ProductServiceImpl implements ProductService{
 
 
         return response;
+    }
+
+    @Override
+    public void reduceQuantity(String productId, long quantity) {
+        Product product = productRepository.findById(productId).orElseThrow(()-> new ProductNotFound(ErrorMessages.PRODUCT_NOT_FOUND));
+        if(product.getStock() < quantity){
+            new InsufficientProduct(ErrorMessages.INSUFFICIENT_PRODUCT);
+        }
+
+        product.setStock(product.getStock()-quantity);
+
+        productRepository.save(product);
+
     }
 
     @Override
