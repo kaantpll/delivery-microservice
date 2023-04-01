@@ -1,11 +1,13 @@
 package com.example.orderservice.service;
 
+import com.example.commonservice.dto.OrderEvent;
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.dto.request.CreateOrderRequest;
 import com.example.orderservice.dto.response.CreatedOrderResponse;
 import com.example.orderservice.dto.response.UpdatedOrderResponse;
 import com.example.orderservice.entity.Order;
 import com.example.orderservice.entity.OrderStatus;
+import com.example.orderservice.producer.OrderProducer;
 import com.example.orderservice.repository.OrderRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,13 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService{
 
     private final OrderRepository orderRepository;
+    private final OrderProducer orderProducer;
 
     @Autowired
     private APIClient apiClient;
-    public OrderServiceImpl( OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderProducer orderProducer) {
         this.orderRepository = orderRepository;
+        this.orderProducer = orderProducer;
     }
 
     @Override
@@ -60,6 +64,13 @@ public class OrderServiceImpl implements OrderService{
 
         CreatedOrderResponse response = new CreatedOrderResponse();
         response.setProductId(order.getProductId());
+
+        OrderEvent orderEvent = new OrderEvent();
+
+        orderEvent.setQuantity(response.getQuantity());
+        orderEvent.setProductId(response.getProductId());
+
+        orderProducer.sendMessage(orderEvent);
 
         return response;
     }
