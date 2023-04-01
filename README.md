@@ -15,3 +15,11 @@
 - Monitoring
     - Grafana
   
+## Next Features
+ - Error Decoder
+ - Logging system
+ - Auth operations
+ - Vault secret 
+ - Testing Unit & Integration
+ - Searching system 
+ - SAGA pattern
