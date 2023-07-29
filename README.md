@@ -1,25 +1,24 @@
-# delivery-microservice
+### Microservice project in Spring boot.
+I used the queue structure to deliver the order event to other services. All services communicate with each other.
 
-## Tecnology I use 
+### Technology I use
+- Spring Boot
+- Kafka
+- PostgreSQL
+- Spring Cloud
+- Docker
 
-- Backend:
-  - Spring Boot (Java)
-- Frontend:
-  - Nextjs (Typescript)
-  - Material UI 
-- Deployement
-  - Docker
-  - Kubernetes
-  - Jetkins
-  
-- Monitoring
-    - Grafana
-  
-## Next Features
- - Error Decoder
- - Logging system
- - Auth operations
- - Vault secret 
- - Testing Unit & Integration
- - Searching system 
- - SAGA pattern
+## Running the application in local
+```shell
+mvn spring-boot:run
+```
+
+## Dockerize Services
+```bash
+$ docker build -t image_name . 
+```
+
+## Running Docker Compose 
+```bash
+$ docker-compose up 
+```
